@@ -46,7 +46,54 @@ janeiro.adicionarLancamento(new Lancamento("Escola", "despesa", 1600));
 ano.calcularSaldo();
 console.log(ano)
 
-function renderizar() {
-    console.log("renderização da interface gráfica")
+function addElement(parent, elementType, text) {
+    const element = document.createElement(elementType); // nao se direciona parametros entre aspas
+    if (text !== "" && text !== undefined && text !== null && text !== 0) {
+        //  if (text === "") {
+        element.innerText = text; // condicional para aceitar parametro vazio
+    }
+    parent.appendChild(element);
+
 }
 
+function renderizar() {
+    const app = document.getElementById("app");
+    if (app.firstChild) {
+        app.firstChild.remove();
+    }
+    const painel = document.createElement("div");
+    for (const mes of ano.meses) {
+        addElement(painel, "h3", mes.nome)
+        for (const lancamento of mes.lancamentos) { //cria o loop que vai chamar as alteração em cada lançamento
+            const detalhesLancamento = lancamento.categoria + " " + lancamento.tipo + " " + lancamento.valor + " ";
+            addElement(painel, "p", detalhesLancamento);
+        }
+        addElement(painel, "h4", mes.totalizador.saldo);
+        addElement(painel, "hr");
+    }
+    app.appendChild(painel);
+}
+
+renderizar();
+
+function adicionarLancamento() {
+    janeiro.adicionarLancamento(new Lancamento("Cinema", "despesa", 100));
+    ano.calcularSaldo();
+    renderizar();
+}
+const botao = document.getElementById("botao");
+botao.addEventListener("click", adicionarLancamento);
+
+// ================================================= + ================================================= + ================================================ + ==============
+
+
+// app.appendChild(document.createElement("hr")); // aqui chama o createElement ja dentro do appendChild, pq querendo ou nao é a raiz do appendChild essa chamada.
+// const nomeDoMes = document.createElement("h3"); // aqui o padrão é sempre criar o elemento, definir o nome do elemento e adicionar o elemento em algum lugar...
+// nomeDoMes.innerText = mes.nome;
+// app.appendChild(nomeDoMes); //coloca um filho a mais no nódulo
+// const detalhesLancamento = document.createElement("p") //associa a variavel a função createElement do JS, para criar o elemento na div
+// detalhesLancamento.innerText = lancamento.categoria + " " + lancamento.tipo + " " + lancamento.valor + " "; // após criar o elemento ele pega o texto das variaveis para jogar no elemento criado
+// app.appendChild(detalhesLancamento); // apos criar o span o appendChild joga o span dentro da div "app"
+// const saldo = document.createElement("h4");
+// saldo.innerText = mes.totalizador.saldo;
+//  app.appendChild(saldo);
