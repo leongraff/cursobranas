@@ -4,7 +4,14 @@ class Ano {
         this.meses = [];
 
     }
-
+    adicionarLancamento(nomeDoMes, lancamento) {
+        for (const mes of this.meses) {
+            if (mes.nome === nomeDoMes) {
+                mes.adicionarLancamento(lancamento);
+                break;
+            }
+        }
+    }
     adicionarMes(mes) {
         this.meses.push(mes); // da o push em cada mes apos a função ser chamada....
     }

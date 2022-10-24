@@ -9,12 +9,12 @@ janeiro.adicionarLancamento(new Lancamento("Aluguel", "despesa", 2500))
 const fevereiro = new Mes("fevereiro")
 fevereiro.adicionarLancamento(new Lancamento("Salário", "receita", 3000));
 fevereiro.adicionarLancamento(new Lancamento("Aluguel", "despesa", 1031));
-fevereiro.adicionarLancamento(new Lancamento("Conta de luz", "despesa", 145));
-fevereiro.adicionarLancamento(new Lancamento("Conta de água", "despesa", 512));
-fevereiro.adicionarLancamento(new Lancamento("Transporte", "despesa", 112));
-fevereiro.adicionarLancamento(new Lancamento("Alimentação", "despesa", 430));
-fevereiro.adicionarLancamento(new Lancamento("Condomínio", "despesa", 230));
-fevereiro.adicionarLancamento(new Lancamento("Farmácia", "despesa", 89));
+//fevereiro.adicionarLancamento(new Lancamento("Conta de luz", "despesa", 145));
+//fevereiro.adicionarLancamento(new Lancamento("Conta de água", "despesa", 512));
+//fevereiro.adicionarLancamento(new Lancamento("Transporte", "despesa", 112));
+//fevereiro.adicionarLancamento(new Lancamento("Alimentação", "despesa", 430));
+//fevereiro.adicionarLancamento(new Lancamento("Condomínio", "despesa", 230));
+//fevereiro.adicionarLancamento(new Lancamento("Farmácia", "despesa", 89));
 
 
 //MARÇO
@@ -22,17 +22,17 @@ fevereiro.adicionarLancamento(new Lancamento("Farmácia", "despesa", 89));
 const marco = new Mes("marco");
 marco.adicionarLancamento(new Lancamento("Salário", "receita", 3000));
 marco.adicionarLancamento(new Lancamento("Aluguel", "despesa", 203));
-marco.adicionarLancamento(new Lancamento("Conta de luz", "despesa", 421));
-marco.adicionarLancamento(new Lancamento("Conta de água", "despesa", 500));
-marco.adicionarLancamento(new Lancamento("Transporte", "despesa", 1024));
-marco.adicionarLancamento(new Lancamento("Alimentação", "despesa", 450));
-marco.adicionarLancamento(new Lancamento("Condomínio", "despesa", 304));
-marco.adicionarLancamento(new Lancamento("Farmácia", "despesa", 124));
+//marco.adicionarLancamento(new Lancamento("Conta de luz", "despesa", 421));
+//marco.adicionarLancamento(new Lancamento("Conta de água", "despesa", 500));
+//marco.adicionarLancamento(new Lancamento("Transporte", "despesa", 1024));
+//marco.adicionarLancamento(new Lancamento("Alimentação", "despesa", 450));
+//marco.adicionarLancamento(new Lancamento("Condomínio", "despesa", 304));
+//marco.adicionarLancamento(new Lancamento("Farmácia", "despesa", 124));
 
 const abril = new Mes("abril");
 abril.adicionarLancamento(new Lancamento("Salário", "receita", 4000))
 abril.adicionarLancamento(new Lancamento("Comida", "despesa", 1000))
-abril.adicionarLancamento(new Lancamento("Benção Divina", "receita", 4500))
+//abril.adicionarLancamento(new Lancamento("Benção Divina", "receita", 4500))
 
 const ano = new Ano();
 ano.adicionarMes(janeiro);
@@ -77,14 +77,31 @@ function renderizar() {
 renderizar();
 
 function adicionarLancamento() {
-    janeiro.adicionarLancamento(new Lancamento("Cinema", "despesa", 100));
+    const mes = document.getElementById("mes");
+    const tipo = document.getElementById("tipo");
+    const categoria = document.getElementById("categoria"); // aqui é chamado categoria.value ali embaixo e dps la no "".
+    const valor = document.getElementById("valor"); // define o valor no const, da o getelementbyid para pegar o id do index, e o value é a parte interna que foi digitada
+    ano.adicionarLancamento(mes.value, new Lancamento(categoria.value, tipo.value, parseFloat(valor.value))); //mes.value chama o nome dado no input e larga chamando a função criada no ano.js
+    // mes.adicionarLancamento(new Lancamento(categoria.value, tipo.value, valor)); // não consigo chamar função assim? mes.adicionarLancamento???????????
     ano.calcularSaldo();
     renderizar();
+    valor.value = "";
+    mes.value = "";
+    tipo.value = "";
+    categoria.value = "";
 }
 const botao = document.getElementById("botao");
 botao.addEventListener("click", adicionarLancamento);
 
+
+
+
+
 // ================================================= + ================================================= + ================================================ + ==============
+
+
+
+
 
 
 // app.appendChild(document.createElement("hr")); // aqui chama o createElement ja dentro do appendChild, pq querendo ou nao é a raiz do appendChild essa chamada.
