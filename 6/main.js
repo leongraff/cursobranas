@@ -9,8 +9,8 @@ janeiro.adicionarLancamento(new Lancamento("Aluguel", "despesa", 2500))
 const fevereiro = new Mes("fevereiro")
 fevereiro.adicionarLancamento(new Lancamento("Salário", "receita", 3000));
 fevereiro.adicionarLancamento(new Lancamento("Aluguel", "despesa", 1031));
-fevereiro.adicionarLancamento(new Lancamento("Conta de luz", "despesa", 145));
-fevereiro.adicionarLancamento(new Lancamento("Conta de água", "despesa", 512));
+//fevereiro.adicionarLancamento(new Lancamento("Conta de luz", "despesa", 145));
+//fevereiro.adicionarLancamento(new Lancamento("Conta de água", "despesa", 512));
 //fevereiro.adicionarLancamento(new Lancamento("Transporte", "despesa", 112));
 //fevereiro.adicionarLancamento(new Lancamento("Alimentação", "despesa", 430));
 //fevereiro.adicionarLancamento(new Lancamento("Condomínio", "despesa", 230));
@@ -22,8 +22,8 @@ fevereiro.adicionarLancamento(new Lancamento("Conta de água", "despesa", 512));
 const marco = new Mes("marco");
 marco.adicionarLancamento(new Lancamento("Salário", "receita", 3000));
 marco.adicionarLancamento(new Lancamento("Aluguel", "despesa", 203));
-marco.adicionarLancamento(new Lancamento("Conta de luz", "despesa", 400));
-marco.adicionarLancamento(new Lancamento("Conta de água", "despesa", 400));
+//marco.adicionarLancamento(new Lancamento("Conta de luz", "despesa", 421));
+//marco.adicionarLancamento(new Lancamento("Conta de água", "despesa", 500));
 //marco.adicionarLancamento(new Lancamento("Transporte", "despesa", 1024));
 //marco.adicionarLancamento(new Lancamento("Alimentação", "despesa", 450));
 //marco.adicionarLancamento(new Lancamento("Condomínio", "despesa", 304));
@@ -46,8 +46,6 @@ janeiro.adicionarLancamento(new Lancamento("Escola", "despesa", 1600));
 ano.calcularSaldo();
 console.log(ano)
 
-// a variavel element recebe um elementType que é onde ele cria o elemento e após isso usa o text para pegar o texto do elemento em questão
-
 function addElement(parent, elementType, text) {
     const element = document.createElement(elementType); // nao se direciona parametros entre aspas
     if (text !== "" && text !== undefined && text !== null && text !== 0) {
@@ -57,9 +55,6 @@ function addElement(parent, elementType, text) {
     parent.appendChild(element);
 
 }
-// parent é de quem ele pega no index, div, por exemplo. é o que ele chama no painel.
-//
-
 
 function renderizar() {
     const app = document.getElementById("app");
@@ -69,31 +64,12 @@ function renderizar() {
     const painel = document.createElement("div");
     for (const mes of ano.meses) {
         addElement(painel, "h3", mes.nome)
-        const tabelaLancamentos = document.createElement("table"); //cria a tabela no dom
         for (const lancamento of mes.lancamentos) { //cria o loop que vai chamar as alteração em cada lançamento
-            const linhaLancamento = document.createElement("tr");
-            addElement(linhaLancamento, "td", lancamento.tipo);
-            addElement(linhaLancamento, "td", lancamento.categoria);
-            addElement(linhaLancamento, "td", lancamento.valor);
-            tabelaLancamentos.appendChild(linhaLancamento);
-
+            const detalhesLancamento = lancamento.categoria + " " + lancamento.tipo + " " + lancamento.valor + " ";
+            addElement(painel, "p", detalhesLancamento);
         }
-        const linhaJuros = document.createElement("tr");
-        addElement(linhaJuros, "td", "Juros");
-        addElement(linhaJuros, "td", mes.totalizador.juros);
-        tabelaLancamentos.appendChild(linhaJuros);
-
-        const linhaRendimentos = document.createElement("tr");
-        addElement(linhaRendimentos, "td", "Rendimentos");
-        addElement(linhaRendimentos, "td", mes.totalizador.rendimentos);
-        tabelaLancamentos.appendChild(linhaRendimentos);
-
-        const linhaSaldo = document.createElement("tr");
-        addElement(linhaSaldo, "td", "Total");
-        addElement(linhaSaldo, "td", mes.totalizador.saldo);
-        tabelaLancamentos.appendChild(linhaSaldo);
-
-        painel.appendChild(tabelaLancamentos);
+        addElement(painel, "h4", mes.totalizador.saldo);
+        addElement(painel, "hr");
     }
     app.appendChild(painel);
 }
@@ -110,20 +86,14 @@ function adicionarLancamento() {
     ano.calcularSaldo();
     renderizar();
     valor.value = "";
-    mes.value = ano.meses(0).nome;
-    tipo.value = "receita";
+    mes.value = "";
+    tipo.value = "";
     categoria.value = "";
 }
 const botao = document.getElementById("botao");
 botao.addEventListener("click", adicionarLancamento);
 
-const mesSelect = document.getElementById("mes")
-for (const mes of ano.meses) {
-    const option = document.createElement("option")
-    option.text = mes.nome;
-    mesSelect.add(option)
-    console.log(mes.nome)
-}
+
 
 
 
