@@ -1,38 +1,31 @@
 //JANEIRO
 
 const janeiro = new Mes("janeiro")
-janeiro.adicionarLancamento(new Lancamento("Salário", "receita", 2000))
-janeiro.adicionarLancamento(new Lancamento("Aluguel", "despesa", 2500))
+janeiro.adicionarLancamento(new Lancamento("Salário", "receita", 3000));
+janeiro.adicionarLancamento(new Lancamento("Aluguel", "despesa", 1000));
+janeiro.adicionarLancamento(new Lancamento("Conta de Luz", "despesa", 200));
+janeiro.adicionarLancamento(new Lancamento("Conta de Água", "despesa", 100));
+janeiro.adicionarLancamento(new Lancamento("Internet", "despesa", 100));
 
 //FEVEREIRO
 
-const fevereiro = new Mes("fevereiro")
+const fevereiro = new Mes("fevereiro");
 fevereiro.adicionarLancamento(new Lancamento("Salário", "receita", 3000));
-fevereiro.adicionarLancamento(new Lancamento("Aluguel", "despesa", 1031));
-fevereiro.adicionarLancamento(new Lancamento("Conta de luz", "despesa", 145));
-fevereiro.adicionarLancamento(new Lancamento("Conta de água", "despesa", 512));
-//fevereiro.adicionarLancamento(new Lancamento("Transporte", "despesa", 112));
-//fevereiro.adicionarLancamento(new Lancamento("Alimentação", "despesa", 430));
-//fevereiro.adicionarLancamento(new Lancamento("Condomínio", "despesa", 230));
-//fevereiro.adicionarLancamento(new Lancamento("Farmácia", "despesa", 89));
+fevereiro.adicionarLancamento(new Lancamento("Aluguel", "despesa", 1200));
+fevereiro.adicionarLancamento(new Lancamento("Conta de Luz", "despesa", 250));
+fevereiro.adicionarLancamento(new Lancamento("Conta de Água", "despesa", 100));
+fevereiro.adicionarLancamento(new Lancamento("Internet", "despesa", 100));
 
-
-//MARÇO
 
 const marco = new Mes("marco");
-marco.adicionarLancamento(new Lancamento("Salário", "receita", 3000));
-marco.adicionarLancamento(new Lancamento("Aluguel", "despesa", 203));
-marco.adicionarLancamento(new Lancamento("Conta de luz", "despesa", 400));
-marco.adicionarLancamento(new Lancamento("Conta de água", "despesa", 400));
-//marco.adicionarLancamento(new Lancamento("Transporte", "despesa", 1024));
-//marco.adicionarLancamento(new Lancamento("Alimentação", "despesa", 450));
-//marco.adicionarLancamento(new Lancamento("Condomínio", "despesa", 304));
-//marco.adicionarLancamento(new Lancamento("Farmácia", "despesa", 124));
+marco.adicionarLancamento(new Lancamento("Salário", "receita", 4000));
+marco.adicionarLancamento(new Lancamento("Aluguel", "despesa", 1200));
+marco.adicionarLancamento(new Lancamento("Conta de Luz", "despesa", 200));
+marco.adicionarLancamento(new Lancamento("Conta de Água", "despesa", 100));
+marco.adicionarLancamento(new Lancamento("Internet", "despesa", 200));
 
 const abril = new Mes("abril");
-abril.adicionarLancamento(new Lancamento("Salário", "receita", 4000))
-abril.adicionarLancamento(new Lancamento("Comida", "despesa", 1000))
-//abril.adicionarLancamento(new Lancamento("Benção Divina", "receita", 4500))
+abril.adicionarLancamento(new Lancamento("Salário", "receita", 4000));
 
 const ano = new Ano();
 ano.adicionarMes(janeiro);
@@ -41,10 +34,13 @@ ano.adicionarMes(marco);
 ano.adicionarMes(abril);
 ano.calcularSaldo();
 
-
-janeiro.adicionarLancamento(new Lancamento("Escola", "despesa", 1600));
+janeiro.adicionarLancamento(new Lancamento("Escola", "despesa", 500));
+fevereiro.adicionarLancamento(new Lancamento("Escola", "despesa", 400));
+marco.adicionarLancamento(new Lancamento("Escola", "despesa", 500));
 ano.calcularSaldo();
-console.log(ano)
+
+console.log(ano.meses)
+
 
 // a variavel element recebe um elementType que é onde ele cria o elemento e após isso usa o text para pegar o texto do elemento em questão
 
@@ -70,27 +66,34 @@ function renderizar() {
     for (const mes of ano.meses) {
         addElement(painel, "h3", mes.nome)
         const tabelaLancamentos = document.createElement("table"); //cria a tabela no dom
+        // atribuir classes dinamicamente a um determinado elemento, id é único, classe se pode atribuir a vários elementos
+        tabelaLancamentos.className = "tabela-lancamentos";
+        const linhaTitulo = document.createElement("tr");
+        addElement(linhaTitulo, "th", "Categoria");
+        addElement(linhaTitulo, "th", "Valor");
+        tabelaLancamentos.appendChild(linhaTitulo);
         for (const lancamento of mes.lancamentos) { //cria o loop que vai chamar as alteração em cada lançamento
             const linhaLancamento = document.createElement("tr");
-            addElement(linhaLancamento, "td", lancamento.tipo);
             addElement(linhaLancamento, "td", lancamento.categoria);
-            addElement(linhaLancamento, "td", lancamento.valor);
+            // addElement(linhaLancamento, "td", lancamento.tipo);
+            addElement(linhaLancamento, "td", formatarDinheiro(lancamento.valor));
             tabelaLancamentos.appendChild(linhaLancamento);
 
         }
+
         const linhaJuros = document.createElement("tr");
-        addElement(linhaJuros, "td", "Juros");
-        addElement(linhaJuros, "td", mes.totalizador.juros);
+        addElement(linhaJuros, "th", "Juros");
+        addElement(linhaJuros, "th", formatarDinheiro(mes.totalizador.juros));
         tabelaLancamentos.appendChild(linhaJuros);
 
         const linhaRendimentos = document.createElement("tr");
-        addElement(linhaRendimentos, "td", "Rendimentos");
-        addElement(linhaRendimentos, "td", mes.totalizador.rendimentos);
+        addElement(linhaRendimentos, "th", "Rendimentos");
+        addElement(linhaRendimentos, "th", formatarDinheiro(mes.totalizador.rendimentos));
         tabelaLancamentos.appendChild(linhaRendimentos);
 
         const linhaSaldo = document.createElement("tr");
-        addElement(linhaSaldo, "td", "Total");
-        addElement(linhaSaldo, "td", mes.totalizador.saldo);
+        addElement(linhaSaldo, "th", "Total");
+        addElement(linhaSaldo, "th", formatarDinheiro(mes.totalizador.saldo));
         tabelaLancamentos.appendChild(linhaSaldo);
 
         painel.appendChild(tabelaLancamentos);

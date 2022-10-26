@@ -47,6 +47,30 @@
         body {
             font-family: Verdana;
         }
+
+        .tabela-lancamentos {
+            width: 600px;
+            background-color: rgb(211, 58, 58);
+            border-collapse: collapse;
+        }
+
+        .tabela-lancamentos tr:nth-child(even) {
+            background-color: #FFF;
+        }
+
+        .tabela-lancamentos td,
+        .tabela-lancamentos th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        .tabela-lancamentos th {
+            padding-top: 10px;
+            padding-bottom: 10px;
+            text-align: left;
+            width: 50%;
+            background-color: rgb(68, 65, 65)
+        }
     </style>
 </head>
 
@@ -65,12 +89,8 @@
         <br /><br />
         <button id="botao">Adicionar Lançamento</button>
     </div>
-    <table border="1">
-        <!-- tr = table roll (linha) e td (celular, cruzamento) th = header da tabela-->
-        <tr>
+    <!-- tr = table roll (linha) e td (celular, cruzamento) th = header da tabela-->
 
-        </tr>
-    </table>
     <div id="app">
     </div>
     <script src="ano.js"></script>

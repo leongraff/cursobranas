@@ -6,7 +6,8 @@ export
 require
 import
 define
-
+id = hashtag
+classe = .
 Criar ou importar um módulo.
 // condições múltiplas, && === AND e !== DIFERENTE
 // throw new === estrutura para apontar um erro 
