@@ -85,7 +85,7 @@ function adicionarLancamento() {
     // mes.adicionarLancamento(new Lancamento(categoria.value, tipo.value, valor)); // não consigo chamar função assim? mes.adicionarLancamento???????????
     ano.calcularSaldo();
     renderizar();
-    valor.value = "";
+    vgit alor.value = "";
     mes.value = "";
     tipo.value = "";
     categoria.value = "";
