@@ -2,6 +2,28 @@ Curso Branas aula 5.
 
 Toda linguagem de programação ou boa parte delas tem um mecanismo de divisão d responsabilides que é esse conceito de modularização.
 
+Reuso de partes do código que você já escreveu.
+Separar responsabilidades
+
+Analisando tudo o que to produzindo até aqui deixo como memorando para eu mesmo a seguinte observação:
+A melhor capacidade profissional que você pode adquirir e manter é:
+Saber manter a concentração durante o período de trabalho e dar deep diver focando no aprendizado na produção de como criar código de qualidade.
+E:
+Dar deep dives enxergando os burando do seu próprío conhecimento.
+ENXERGAR OS BURACOS DO PRÓPRIO CONHECINHEMENTO.
+
+
+Componentização:
+
+
+DOM OU "DOCUMENT OBJECT MODEL" ? a dom chama a api?
+Representa a página de forma que os programas possam alterar a estrutura do documento.
+Representa a página como um documento?
+API OU "APLICATION PROGRAMMING INTERFACE" - interface de programação
+
+
+
+
 export
 require
 import
