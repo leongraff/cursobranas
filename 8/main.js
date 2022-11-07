@@ -46,32 +46,9 @@ function addElement(parent, elementType, text) { // adiciona um elemento com "pa
     const element = document.createElement(elementType); // nao se direciona parametros entre aspas
     if (text !== "" && text !== undefined && text !== null && text !== 0) {
         //  if (text === "") {
-        element.innerText = text; // condicional para aceitar parametro vazio
+        element.innerText = text; // this is a conditional that makes the function able to accept empty parameters
     }
     parent.appendChild(element);
-}
-
-class Grafico {
-    constructor() {
-        this.element = document.createElement("div");
-        this.element.className = "grafico";
-        this.cores = ["red", "yellow", "green", "blue"];
-    }
-
-    adicionarColuna(valor, descricao) {
-        const coluna = document.createElement("div");
-        coluna.className = "grafico-coluna";
-        const cor = document.createElement("div");
-        cor.style.height = (valor * 100) / 10000;
-        cor.style.background = this.cores.pop();
-        coluna.appendChild(cor);
-        const nomeDoMes = document.createElement("div");
-        nomeDoMes.className = "grafico-coluna-texto";
-        nomeDoMes.innerText = descricao;
-        coluna.appendChild(cor);
-        coluna.appendChild(nomeDoMes);
-        this.element.appendChild(coluna);
-    }
 }
 
 function renderizar() {
@@ -79,14 +56,15 @@ function renderizar() {
     if (app.firstChild) {
         app.firstChild.remove();
     }
-    const painel = document.createElement("div");
+    const painel = new Div();
     const grafico = new Grafico();
     for (const mes of ano.meses) {
         grafico.adicionarColuna(mes.totalizador.saldo, mes.nome);
     }
-    painel.appendChild(grafico.element);
+    painel.addChildElement(grafico.element);
     for (const mes of ano.meses) {
-        addElement(painel, "h3", mes.nome)
+        const nomeDoMes = new h4(mes.nome); //new is always used when a class is being  invoked
+        painel.addChildElement(nomeDoMes.element);
         const tabelaLancamentos = new Tabela("tabela-lancamentos");
         tabelaLancamentos.addRow("th", ["Categoria", "Valor"]);
         for (const lancamento of mes.lancamentos) { //cria o loop que vai chamar as alteração em cada lançamento
@@ -95,10 +73,9 @@ function renderizar() {
         tabelaLancamentos.addRow("th", ["Juros", formatarDinheiro(mes.totalizador.juros)]);
         tabelaLancamentos.addRow("th", ["Rendimentos", formatarDinheiro(mes.totalizador.rendimentos)]);
         tabelaLancamentos.addRow("th", ["Total", formatarDinheiro(mes.totalizador.saldo)]);
-
-        painel.appendChild(tabelaLancamentos.element);
+        painel.addChildElement(tabelaLancamentos.element);
     }
-    app.appendChild(painel);
+    app.appendChild(painel.element);
 }
 
 
