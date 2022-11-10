@@ -57,6 +57,16 @@ function renderizar() {
         app.firstChild.remove();
     }
     const painel = new Div();
+    const titulo = new h4("Finanças Pessoais")
+
+    painel.addChildElement(titulo.element)
+    const form = new Div("form-lancamento");
+    painel.addChildElement(form.element);
+    //const mesSelect = new Select();
+    //const tipoSelect = new Select();
+    //const categoriaInputText = new Input();
+    //const valorInputNumber = new Input();
+
     const grafico = new Grafico();
     for (const mes of ano.meses) {
         grafico.adicionarColuna(mes.totalizador.saldo, mes.nome);
@@ -84,8 +94,8 @@ renderizar();
 function adicionarLancamento() {
     const mes = document.getElementById("mes");
     const tipo = document.getElementById("tipo");
-    const categoria = document.getElementById("categoria"); // aqui é chamado categoria.value ali embaixo e dps la no "".
-    const valor = document.getElementById("valor"); // define o valor no const, da o getelementbyid para pegar o id do index, e o value é a parte interna que foi digitada
+    const categoria = document.getElementById("categoria");
+    const valor = document.getElementById("valor");
     ano.adicionarLancamento(mes.value, new Lancamento(categoria.value, tipo.value, parseFloat(valor.value))); //mes.value chama o nome dado no input e larga chamando a função criada no ano.js
     // mes.adicionarLancamento(new Lancamento(categoria.value, tipo.value, valor)); // não consigo chamar função assim? mes.adicionarLancamento???????????
     ano.calcularSaldo();
