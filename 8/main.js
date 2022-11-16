@@ -51,6 +51,20 @@ function addElement(parent, elementType, text) { // adiciona um elemento com "pa
     parent.appendChild(element);
 }
 
+class Select {
+    constructor(id) {
+        this.element = document.createElement("select"); // creates the select by an id
+        this.element.id = id //linking the id of the class with de id of the element created
+    }
+    addOption(text) {
+        const option = document.createElement("option");
+        option.text = text;
+        this.element.appendChild(option); //calls the option text
+    }
+}
+
+
+
 function renderizar() {
     const app = document.getElementById("app");
     if (app.firstChild) {
@@ -62,11 +76,17 @@ function renderizar() {
     painel.addChildElement(titulo.element)
     const form = new Div("form-lancamento");
     painel.addChildElement(form.element);
-    //const mesSelect = new Select();
-    //const tipoSelect = new Select();
-    //const categoriaInputText = new Input();
-    //const valorInputNumber = new Input();
-
+    const mesSelect = new Select("mes");
+    for (const mes of ano.meses) {
+        mesSelect.addOption(mes.nome);
+    }
+    const tipoSelect = new Select("tipo");
+    tipoSelect.addOption("receita")
+    tipoSelect.addOption("despesa")
+    // const categoriaInputText = new Input();
+    // const valorInputNumber = new Input();
+    form.addChildElement(mesSelect.element);
+    form.addChildElement(tipoSelect.element)
     const grafico = new Grafico();
     for (const mes of ano.meses) {
         grafico.adicionarColuna(mes.totalizador.saldo, mes.nome);
@@ -78,7 +98,7 @@ function renderizar() {
         const tabelaLancamentos = new Tabela("tabela-lancamentos");
         tabelaLancamentos.addRow("th", ["Categoria", "Valor"]);
         for (const lancamento of mes.lancamentos) { //cria o loop que vai chamar as alteração em cada lançamento
-            tabelaLancamentos.addRow("td", [lancamento.categoria, formatarDinheiro(lancamento.getValorString(valor))]);
+            tabelaLancamentos.addRow("td", [lancamento.categoria, formatarDinheiro(lancamento.valor)]);//(lancamento.getValorString(valor))]);
         }
         tabelaLancamentos.addRow("th", ["Juros", formatarDinheiro(mes.totalizador.juros)]);
         tabelaLancamentos.addRow("th", ["Rendimentos", formatarDinheiro(mes.totalizador.rendimentos)]);
