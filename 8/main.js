@@ -63,6 +63,41 @@ class Select {
     }
 }
 
+class Input {
+    constructor(id, type, placeholder) {
+        this.element = document.createElement("input");
+        this.element.id = id;
+        this.element.type;
+        this.element.placeholder = placeholder;
+    }
+}
+
+class Button {
+    constructor(id, text) {
+        this.element = document.createElement("button");
+        this.element.id = id;
+        this.element.innerText = text;
+    }
+    addListener(fn) {
+        this.element.addEventListener("click", fn);
+
+    }
+}
+
+function adicionarLancamento() {
+    const mes = document.getElementById("mes");
+    const tipo = document.getElementById("tipo");
+    const categoria = document.getElementById("categoria");
+    const valor = document.getElementById("valor");
+    ano.adicionarLancamento(mes.value, new Lancamento(categoria.value, tipo.value, parseFloat(valor.value))); //mes.value chama o nome dado no input e larga chamando a função criada no ano.js
+    // mes.adicionarLancamento(new Lancamento(categoria.value, tipo.value, valor)); // não consigo chamar função assim? mes.adicionarLancamento???????????
+    ano.calcularSaldo();
+    renderizar();
+    valor.value = "";
+    mes.value = ano.meses[0].nome;
+    tipo.value = "receita";
+    categoria.value = "";
+}
 
 
 function renderizar() {
@@ -83,10 +118,17 @@ function renderizar() {
     const tipoSelect = new Select("tipo");
     tipoSelect.addOption("receita")
     tipoSelect.addOption("despesa")
-    // const categoriaInputText = new Input();
-    // const valorInputNumber = new Input();
+    const categoriaInputText = new Input("categoria", "text", "Categoria");
+    const valorInputNumber = new Input("valor", "number", "Valor");
+    const addButton = new Button("botao", "Adicionar")
     form.addChildElement(mesSelect.element);
-    form.addChildElement(tipoSelect.element)
+    form.addChildElement(tipoSelect.element);
+    form.addChildElement(categoriaInputText.element);
+    form.addChildElement(valorInputNumber.element);
+    form.addChildElement(addButton.element);
+    addButton.addListener(() => {
+        adicionarLancamento();
+    });
     const grafico = new Grafico();
     for (const mes of ano.meses) {
         grafico.adicionarColuna(mes.totalizador.saldo, mes.nome);
@@ -109,31 +151,9 @@ function renderizar() {
 }
 
 
+
 renderizar();
 
-function adicionarLancamento() {
-    const mes = document.getElementById("mes");
-    const tipo = document.getElementById("tipo");
-    const categoria = document.getElementById("categoria");
-    const valor = document.getElementById("valor");
-    ano.adicionarLancamento(mes.value, new Lancamento(categoria.value, tipo.value, parseFloat(valor.value))); //mes.value chama o nome dado no input e larga chamando a função criada no ano.js
-    // mes.adicionarLancamento(new Lancamento(categoria.value, tipo.value, valor)); // não consigo chamar função assim? mes.adicionarLancamento???????????
-    ano.calcularSaldo();
-    renderizar();
-    valor.value = "";
-    mes.value = ano.meses(0).nome;
-    tipo.value = "receita";
-    categoria.value = "";
-}
-const botao = document.getElementById("botao");
-botao.addEventListener("click", adicionarLancamento);
 
-const mesSelect = document.getElementById("mes")
-for (const mes of ano.meses) {
-    const option = document.createElement("option")
-    option.text = mes.nome;
-    mesSelect.add(option)
-    console.log(mes.nome)
-}
 
 

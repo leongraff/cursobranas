@@ -3,3 +3,5 @@ All programming languages have the same concept, (or at least a big part of them
 
 Being able to reuse the code and divide the roles/responsabilities.
 
+ctrl + k + c = to add comment
+ctrl + k + u = to remove a comment
