@@ -34,10 +34,6 @@ ano.adicionarMes(marco);
 ano.adicionarMes(abril);
 ano.calcularSaldo();
 
-janeiro.adicionarLancamento(new Lancamento("Escola", "despesa", 500));
-fevereiro.adicionarLancamento(new Lancamento("Escola", "despesa", 400));
-marco.adicionarLancamento(new Lancamento("Escola", "despesa", 500));
-ano.calcularSaldo();
 
 console.log(ano.meses)
 
@@ -51,38 +47,10 @@ function addElement(parent, elementType, text) { // adiciona um elemento com "pa
     parent.appendChild(element);
 }
 
-class Select {
-    constructor(id) {
-        this.element = document.createElement("select"); // creates the select by an id
-        this.element.id = id //linking the id of the class with de id of the element created
-    }
-    addOption(text) {
-        const option = document.createElement("option");
-        option.text = text;
-        this.element.appendChild(option); //calls the option text
-    }
-}
 
-class Input {
-    constructor(id, type, placeholder) {
-        this.element = document.createElement("input");
-        this.element.id = id;
-        this.element.type;
-        this.element.placeholder = placeholder;
-    }
-}
 
-class Button {
-    constructor(id, text) {
-        this.element = document.createElement("button");
-        this.element.id = id;
-        this.element.innerText = text;
-    }
-    addListener(fn) {
-        this.element.addEventListener("click", fn);
 
-    }
-}
+
 
 function adicionarLancamento() {
     const mes = document.getElementById("mes");
@@ -107,7 +75,6 @@ function renderizar() {
     }
     const painel = new Div();
     const titulo = new h4("Finanças Pessoais")
-
     painel.addChildElement(titulo.element)
     const form = new Div("form-lancamento");
     painel.addChildElement(form.element);
@@ -121,14 +88,14 @@ function renderizar() {
     const categoriaInputText = new Input("categoria", "text", "Categoria");
     const valorInputNumber = new Input("valor", "number", "Valor");
     const addButton = new Button("botao", "Adicionar")
+    addButton.addListener(() => {
+        adicionarLancamento();
+    });
     form.addChildElement(mesSelect.element);
     form.addChildElement(tipoSelect.element);
     form.addChildElement(categoriaInputText.element);
     form.addChildElement(valorInputNumber.element);
     form.addChildElement(addButton.element);
-    addButton.addListener(() => {
-        adicionarLancamento();
-    });
     const grafico = new Grafico();
     for (const mes of ano.meses) {
         grafico.adicionarColuna(mes.totalizador.saldo, mes.nome);
