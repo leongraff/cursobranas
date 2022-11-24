@@ -1,4 +1,3 @@
 # cursobranas
-Curso Rodrigo Brana JS
-Desenvolvimento de uma plataforma que faça e armazene lançamentos salariais por mês.
-Calcule taxa de juros e rendimentos.
+Rodrigo Branas JS Course
+Developing a platform that can take values month by month, with taxes and incomes, showing up a graph.
