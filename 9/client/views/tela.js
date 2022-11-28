@@ -1,9 +1,24 @@
 class Tela {
     constructor() {
-        console.log("init");
+        this.init();
     }
-
-
+    async init() { // this is an async call, it comes and back
+        // when the call comes back, it drops in this const below (response)
+        const response = await fetch("http://localhost:3000/api/lancamentos");  //fetch is an api as the dom is, is this the get method?
+        const lancamentos = await response.json();
+        const ano = new Ano();
+        ano.adicionarMes(new Mes("janeiro"));
+        ano.adicionarMes(new Mes("fevereiro"));
+        ano.adicionarMes(new Mes("marco"));
+        ano.adicionarMes(new Mes("abril"));
+        ano.adicionarMes(new Mes("maio"));
+        for (const lancamento of lancamentos) {
+            ano.adicionarLancamento(lancamento.mes, new Lancamento(lancamento.categoria, lancamento.tipo, lancamento.valor))
+        }
+        ano.calcularSaldo();
+        this.ano = ano;
+        this.renderizar();
+    }
 
     adicionarLancamento() {
         const mes = document.getElementById("mes");
@@ -11,7 +26,7 @@ class Tela {
         const categoria = document.getElementById("categoria");
         const valor = document.getElementById("valor");
         this.ano.adicionarLancamento(mes.value, new Lancamento(categoria.value, tipo.value, parseFloat(valor.value))); //mes.value chama o nome dado no input e larga chamando a função criada no this.ano.js
-        this.ano.calcularSaldo();
+        fetch("http://localhost:3000/api/lancamentos", { method: "post" }) //get is when it consumes, post is when it writes...
         this.renderizar();
         valor.value = "";
         mes.value = this.ano.meses[0].nome;

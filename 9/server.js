@@ -3,7 +3,7 @@ const app = express();
 app.use("/", express.static("./client"));
 
 const lancamentos = [
-    { mes: "janeiro", categoria: "Salário", tipo: "receita", valor: 3000 },
+    { mes: "janeiro", categoria: "Salário", tipo: "receita", valor: 4000 },
     { mes: "janeiro", categoria: "Aluguel", tipo: "despesa", valor: 1000 },
     { mes: "janeiro", categoria: "Conta de Luz", tipo: "despesa", valor: 200 },
     { mes: "janeiro", categoria: "Conta de Água", tipo: "despesa", valor: 100 },
@@ -18,7 +18,10 @@ const lancamentos = [
     { mes: "marco", categoria: "Conta de Luz", tipo: "despesa", valor: 200 },
     { mes: "marco", categoria: "Conta de Água", tipo: "despesa", valor: 100 },
     { mes: "marco", categoria: "Internet", tipo: "despesa", valor: 200 },
-    { mes: "abril", categoria: "Salário", tipo: "receita", valor: 4000 }
+    { mes: "abril", categoria: "Salário", tipo: "receita", valor: 4000 },
+    { mes: "maio", categoria: "Salário", tipo: "receita", valor: 4000 },
+    { mes: "maio", categoria: "Escola", tipo: "despesa", valor: 400 },
+    { mes: "maio", categoria: "Internet", tipo: "despesa", valor: 400 }
 ];
 
 app.get("/api/lancamentos", function (req, res) {
