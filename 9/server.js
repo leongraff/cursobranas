@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+app.use(express.json()); // setting the express to being able to read the body of the requisition
 app.use("/", express.static("./client"));
 
 const lancamentos = [
@@ -19,13 +20,16 @@ const lancamentos = [
     { mes: "marco", categoria: "Conta de Água", tipo: "despesa", valor: 100 },
     { mes: "marco", categoria: "Internet", tipo: "despesa", valor: 200 },
     { mes: "abril", categoria: "Salário", tipo: "receita", valor: 4000 },
-    { mes: "maio", categoria: "Salário", tipo: "receita", valor: 4000 },
-    { mes: "maio", categoria: "Escola", tipo: "despesa", valor: 400 },
-    { mes: "maio", categoria: "Internet", tipo: "despesa", valor: 400 }
+    { mes: "abril", categoria: "Escola", tipo: "despesa", valor: 400 }
 ];
-
+//read
 app.get("/api/lancamentos", function (req, res) {
     res.json(lancamentos); //returning in json format
-})
+});
 
+//write
+app.post("/api/lancamentos", function (req, res) {
+    console.log("body", req.body);
+    res.end();
+})
 app.listen(3000);
