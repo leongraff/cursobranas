@@ -29,7 +29,8 @@ app.get("/api/lancamentos", function (req, res) {
 
 //write
 app.post("/api/lancamentos", function (req, res) {
-    console.log("body", req.body);
+    const lancamento = req.body;
+    lancamentos.push(lancamento);
     res.end();
 })
 app.listen(3000);
