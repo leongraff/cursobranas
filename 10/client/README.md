@@ -5,3 +5,9 @@ Being able to reuse the code and divide the roles/responsabilities.
 
 ctrl + k + c = to add comment
 ctrl + k + u = to remove a comment
+
+about node:
+
+node -v
+npm init -y
+npm install express

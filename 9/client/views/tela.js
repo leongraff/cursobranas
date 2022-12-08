@@ -5,7 +5,7 @@ class Tela {
     async init() { // this is an async call, it comes and back
         // when the call comes back, it drops in this const below (response)
         const response = await fetch("http://localhost:3000/api/lancamentos");  //fetch is an api as the dom is, is this the get method?
-        const lancamentos = await response.json();
+        const lancamentos = await response.json(); // fetch is a resource that allows to access the backend - transformed to json
         const ano = new Ano();
         ano.adicionarMes(new Mes("janeiro"));
         ano.adicionarMes(new Mes("fevereiro"));
