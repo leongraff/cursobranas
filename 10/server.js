@@ -1,36 +1,22 @@
 const express = require("express");
+const pgp = require("pg-promise"); //brought up the library
+
 const app = express();
 app.use(express.json()); // setting the express to being able to read the body of the requisition
 app.use("/", express.static("./client"));
+const connection = pgp()("postgres://postgres:Uzumymwq1!@@localhost:5432/app");  // creating the connection with the library, why double parentheses?? idk settings?
 
-const lancamentos = [
-    { mes: "janeiro", categoria: "Salário", tipo: "receita", valor: 4000 },
-    { mes: "janeiro", categoria: "Aluguel", tipo: "despesa", valor: 1000 },
-    { mes: "janeiro", categoria: "Conta de Luz", tipo: "despesa", valor: 200 },
-    { mes: "janeiro", categoria: "Conta de Água", tipo: "despesa", valor: 100 },
-    { mes: "janeiro", categoria: "Internet", tipo: "despesa", valor: 100 },
-    { mes: "fevereiro", categoria: "Salário", tipo: "receita", valor: 3000 },
-    { mes: "fevereiro", categoria: "Aluguel", tipo: "despesa", valor: 1200 },
-    { mes: "fevereiro", categoria: "Conta de Luz", tipo: "despesa", valor: 250 },
-    { mes: "fevereiro", categoria: "Conta de Água", tipo: "despesa", valor: 100 },
-    { mes: "fevereiro", categoria: "Internet", tipo: "despesa", valor: 100 },
-    { mes: "marco", categoria: "Salário", tipo: "receita", valor: 4000 },
-    { mes: "marco", categoria: "Aluguel", tipo: "despesa", valor: 1200 },
-    { mes: "marco", categoria: "Conta de Luz", tipo: "despesa", valor: 200 },
-    { mes: "marco", categoria: "Conta de Água", tipo: "despesa", valor: 100 },
-    { mes: "marco", categoria: "Internet", tipo: "despesa", valor: 200 },
-    { mes: "abril", categoria: "Salário", tipo: "receita", valor: 4000 },
-    { mes: "abril", categoria: "Escola", tipo: "despesa", valor: 400 }
-];
 //read service
-app.get("/api/lancamentos", function (req, res) {
-    res.json(lancamentos); //returning in json format
+app.get("/api/lancamentos", async function (req, res) {
+    const lancamento = await connection.query("select * from personal_finance.lancamento", []) //need the array space to get the data? and pay attention to the connection.query enlacement? 
+    console.log(lancamento);
+    res.json(lancamento); //returning in json format, await e async are always together
 });
 
 //write service
-app.post("/api/lancamentos", function (req, res) {
-    const lancamento = req.body;
-    lancamentos.push(lancamento);
+app.post("/api/lancamentos", async function (req, res) {
+    const lancamento = req.body; //what is a req.body?
+    await connection.query("insert into personal_finance.lancamento(mes,categoria,tipo,valor) values($1,$2,$3,$4) [lancamento.mes,lancamento.categoria, lancamento.tipo,lancamento.valor]")
     res.end();
 })
 app.listen(3000);

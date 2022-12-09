@@ -48,3 +48,7 @@ arrays are always split by comma remember that
 
 api = application programming interface
 this is basically an interface that the user is not an human being, the user is just another machine.
+the library doenst know how to convert numeric in string? thats because PARSEFLOAT IS IMPORTANT
+
+
+
