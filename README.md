@@ -50,5 +50,15 @@ api = application programming interface
 this is basically an interface that the user is not an human being, the user is just another machine.
 the library doenst know how to convert numeric in string? thats because PARSEFLOAT IS IMPORTANT
 
+tasks:
 
+1 - start point of the application
+2 - database connection
+3 - api services definition (aplication programming interface)
+4 - data interaction with the database
+5 - api routes settings and server opening in a specific port (app.get, app.listen)
 
+SRP - Single Responsibility Principle:
+    Pull apart things that change because specific reasons.
+    Connection, adresss, query, port... all in the same file make the archive weak.
+    Because of the constans and the coupling between these responsabilities.

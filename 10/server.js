@@ -1,5 +1,5 @@
 const express = require("express");
-const pgp = require("pg-promise"); //brought up the library
+const pgp = require("pg-promise"); //brought up the library - pg-promise is the library, update, delete and data insertion
 
 const app = express();
 app.use(express.json()); // setting the express to being able to read the body of the requisition
