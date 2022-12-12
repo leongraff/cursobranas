@@ -12,7 +12,7 @@ class Tela {
         ano.adicionarMes(new Mes("marco"));
         ano.adicionarMes(new Mes("abril"));
         for (const lancamento of lancamentos) {
-            ano.adicionarLancamento(lancamento.mes, new Lancamento(lancamento.categoria, lancamento.tipo, parseFloat(lancamento.valor)))
+            ano.adicionarLancamento(lancamento.mes, new Lancamento(lancamento.categoria, lancamento.tipo, parseFloat(lancamento.valor)));
         }
         ano.calcularSaldo();
         this.ano = ano;
@@ -25,9 +25,7 @@ class Tela {
         const categoria = document.getElementById("categoria");
         const valor = document.getElementById("valor");
         this.ano.adicionarLancamento(mes.value, new Lancamento(categoria.value, tipo.value, parseFloat(valor.value))); //mes.value chama o nome dado no input e larga chamando a função criada no this.ano.js
-        fetch("http://localhost:3000/api/lancamentos", {
-            method: "post", headers: { "content-type": "application/json" }, body: JSON.stringify({ mes: mes.value, categoria: categoria.value, tipo: tipo.value, valor: parseFloat(valor.value) })
-        }) //get is when it consumes, post is when it writes...
+        fetch("http://localhost:3000/api/lancamentos", { method: "post", headers: { "content-type": "application/json" }, body: JSON.stringify({ mes: mes.value, categoria: categoria.value, tipo: tipo.value, valor: parseFloat(valor.value) }) }); //get is when it consumes, post is when it writes...
         this.renderizar();
         valor.value = "";
         mes.value = this.ano.meses[0].nome;
