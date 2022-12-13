@@ -6,7 +6,7 @@ app.use(express.json()); // setting the express to being able to read the body o
 app.use("/", express.static("./client"));
 
 const connection = pgp()("postgres://postgres:Uzumymwq1!@@localhost:5432/app");  // creating the connection with the library, why double parentheses?? idk settings?
-
+// this lib create the connection pool, 
 //read service
 app.get("/api/lancamentos", async function (req, res) { //here it reads the registers
     const lancamentos = await connection.query("select * from personal_finance.lancamento", []) //need the array space to get the data? and pay attention to the connection.query enlacement? 

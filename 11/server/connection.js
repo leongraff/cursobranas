@@ -8,5 +8,4 @@ class Connection {
         return this.connection.query(statement, params);
     }
 }
-
 module.exports = Connection;
