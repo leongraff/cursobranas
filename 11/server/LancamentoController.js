@@ -1,20 +1,15 @@
 class LancamentoController {
     constructor(httpServer, lancamentoData) {
 
+        httpServer.register("get", "/api/lancamentos", async function (params, body) { //after async here ur attending the callback (await callback(httpserver))
+            const lancamentos = await lancamentoData.getLancamentos();
+            return lancamentos;
+        })
 
-
-        //read service
-        app.get("/api/lancamentos", async function (req, res) { //here it reads the registers
-            const lancamentos = await lancamentoData.getLancamento(); //need the array space to get the data? and pay attention to the connection.query enlacement? 
-            console.log(lancamentos);
-            res.json(lancamentos);
-        });
-
-        //write service
-        app.post("/api/lancamentos", async function (req, res) {
-            const lancamento = req.body;
+        httpServer.register("post", "/api/lancamentos", async function (params, body) {
+            const lancamento = body;
             await lancamentoData.saveLancamento(lancamento);
-            res.end();
+
         });
 
     }

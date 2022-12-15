@@ -2,7 +2,7 @@ class LancamentoData {
     constructor(connection) {
         this.connection = connection;
     }
-    async getLancamento() {
+    async getLancamentos() {
         const lancamentos = await this.connection.query("select * from personal_finance.lancamento", []);
         return lancamentos;
     }

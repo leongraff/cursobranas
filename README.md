@@ -62,3 +62,9 @@ SRP - Single Responsibility Principle:
     Pull apart things that change because specific reasons.
     Connection, adresss, query, port... all in the same file make the archive weak.
     Because of the constans and the coupling between these responsabilities.
+
+DIP - Dependency Inversion Principle:
+    High level modules shold not depend on low level modules.
+    Server connection is in a lower level than the save/get operations, must not be dependent on each othen.
+    Maybe one of the possibilities choosing this is way is that I can connect to another database.
+    
